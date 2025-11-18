@@ -1,6 +1,6 @@
 import com.google.gson.annotations.SerializedName;
 
-import java.math.BigDecimal;
+
 
 public record Moneda(
         @SerializedName("USD") double monedaUsd,
@@ -8,5 +8,7 @@ public record Moneda(
         @SerializedName("BRL") double monedaBrl,
         @SerializedName("COP") double monedaCop,
         @SerializedName("CLP") double monedaClp,
-        @SerializedName("BOB") double monedaBob) {
+        @SerializedName("BOB") double monedaBob,
+        @SerializedName("MXN") double monedaMxn){
+
 }

@@ -1,67 +1,75 @@
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.util.Locale;
+
 import java.util.Scanner;
 
 public class Principal {
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
-            System.out.println("Conversor de Monedas\n" +
-                "Opcion 1.- USD a ARS\n" +
-                "Opcion 2.- USD a BOB\n" +
-                "Opcion 3.- USD a CHP\n" +
-                "Opcion 4.- USD a BRL\n" +
-                "Opcion 5.- USD a COP\n");
+        Scanner respuestaUsuario = new Scanner(System.in);
 
-            Scanner respuestaUsuario = new Scanner(System.in);
+        ConversorAPI conversorAPI = new ConversorAPI();
+        Moneda monedas = conversorAPI.consultaMoneda();
 
-            int opcionUsuario = respuestaUsuario.nextInt();
+        int opcionUsuario = -1; //Inicializamos con un valor distinto de 0
 
-            ConversorAPI consulta = new ConversorAPI();
+        while (opcionUsuario != 0) {
 
-
-
-            switch (opcionUsuario){
-                case 1:
-                try {
-
-                    Moneda moneda = consulta.consultaMoneda();
-
-                    System.out.println("Ingrese monto USD");
-
-                    Scanner montoUsd = new Scanner(System.in);
-
-                    double ingresoUsd = montoUsd.nextDouble();
-
-                    CalculadoraMoneda.resultadoCalculo(ingresoUsd, moneda.monedaArs());
+            System.out.println("\n💱 Conversor de Monedas\n" +
+                    "💵➡️💰 Opción 1.- USD a ARS\n" +
+                    "💵➡️💰 Opción 2.- USD a BOB\n" +
+                    "💵➡️💰 Opción 3.- USD a CLP\n" +
+                    "💵➡️💰 Opción 4.- USD a BRL\n" +
+                    "💵➡️💰 Opción 5.- USD a COP\n" +
+                    "❌ Opción 0.- Salir\n");
 
 
-                } catch (NullPointerException e){
-                    System.out.println("no se pudo realizar el calculo");
-                    break;
-                } case 2:
-                    Moneda moneda = consulta.consultaMoneda();
 
-                    System.out.println("Ingrese monto USD");
+            System.out.print("Seleccione una opción: ");
+            opcionUsuario = respuestaUsuario.nextInt();
 
-                    Scanner montoUsd = new Scanner(System.in);
-
-                    double ingresoUsd = montoUsd.nextDouble();
+            try {
 
 
-                    CalculadoraMoneda.resultadoCalculo(ingresoUsd, moneda.monedaBob());
-                    break;
+                switch (opcionUsuario) {
+                    case 1:
+                        OpcionMenu.mostrarConversionFinal(monedas.monedaUsd(), monedas.monedaArs());
+                        break;
+                    case 2:
+                        OpcionMenu.mostrarConversionFinal(monedas.monedaUsd(), monedas.monedaBob());
+                        break;
+                    case 3:
+                        OpcionMenu.mostrarConversionFinal(monedas.monedaUsd(), monedas.monedaClp());
+                        break;
+                    case 4:
+                        OpcionMenu.mostrarConversionFinal(monedas.monedaUsd(), monedas.monedaBrl());
+                        break;
+                    case 5:
+                        OpcionMenu.mostrarConversionFinal(monedas.monedaUsd(), monedas.monedaCop());
+                        break;
+                    case 6:
+                        OpcionMenu.mostrarConversionFinal(monedas.monedaUsd(), monedas.monedaMxn());
+                    case 0:
+                        System.out.println("Saliendo del programa...");
+                        break;
 
+
+                    default:
+                        System.out.println("Opcion no valida");
                 }
 
-
-
+            } catch (RuntimeException e) {
+                System.out.println("No se pudo iniciar");
             }
-
-
-
-
         }
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
